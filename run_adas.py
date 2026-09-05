@@ -22,6 +22,7 @@ from indriyo_core.stream_receiver import MJPEGStreamReceiver, OpenCVStreamReceiv
 from indriyo_core.synthetic_stream import SyntheticRearviewStream
 from indriyo_core.telemetry import SimulatedTelemetry, SerialOBD2Telemetry
 from indriyo_core.ttc_calculator import ThreatLevel
+from indriyo_core.web_server import ADASStreamServer
 
 
 def print_banner():
@@ -90,6 +91,8 @@ def main():
     parser.add_argument("--headless", action="store_true", help="Run without OpenCV GUI window")
     parser.add_argument("--no-audio", action="store_true", help="Disable audio alarm chimes")
     parser.add_argument("--max-frames", type=int, default=0, help="Stop after N frames (0 = continuous)")
+    parser.add_argument("--serve", action="store_true", help="Start local Web Stream Server on /mirror and /stream")
+    parser.add_argument("--port", type=int, default=8080, help="Port for Web Stream Server (default: 8080)")
 
     args = parser.parse_args()
     print_banner()
@@ -126,6 +129,12 @@ def main():
         enable_audio=not args.no_audio
     )
 
+    # 4. Optional Web Stream Server
+    stream_server = None
+    if args.serve:
+        stream_server = ADASStreamServer(host="0.0.0.0", port=args.port)
+        stream_server.start()
+
     print("\n[✓] Indriyo ADAS Engine Active.")
     print("    Press 'q' or Ctrl+C to terminate.")
     if not args.headless:
@@ -141,6 +150,10 @@ def main():
             if not ret or hud_frame is None:
                 time.sleep(0.01)
                 continue
+
+            # Update web stream server
+            if stream_server:
+                stream_server.update_frame(hud_frame, threat, telemetry.get_telemetry())
 
             frame_count += 1
             if args.max_frames > 0 and frame_count >= args.max_frames:

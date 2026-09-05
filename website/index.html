@@ -25,6 +25,8 @@
           <li><a href="#compare">Spec Showdown</a></li>
           <li><a href="#bom">Bangladesh BOM</a></li>
           <li><a href="#circuit">Circuit Guide</a></li>
+          <li><a href="#downloads">CAD & Downloads</a></li>
+          <li><a href="benchmark_report.html" target="_blank" style="color:var(--accent-green);font-weight:600;">Road Benchmarks ↗</a></li>
           <li><a href="#posters">Marketing Kit</a></li>
         </ul>
       </nav>
@@ -348,6 +350,97 @@
           <p>
             Motorcycle engine RPM vibrations can drift adjustment screws. Add a drop of clear nail polish or silicone adhesive to lock the screw head permanently in place.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Hardware, 3D CAD & Real-Road Benchmarks -->
+  <section id="downloads" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Open Engineering & CAD</div>
+        <h2 class="section-title">3D Models, Quantized AI & Road Benchmarks</h2>
+        <p class="section-subtitle">
+          Free, open-source 3D printable meshes, lightweight INT8 models, and real road validation data.
+        </p>
+      </div>
+
+      <div class="downloads-grid">
+        <!-- Card 1: Dual Cam Tail Pod -->
+        <div class="download-card">
+          <div>
+            <div class="download-header">
+              <div class="download-icon">📦</div>
+              <div>
+                <h3 style="font-size:1.1rem;color:#fff;">Dual-Camera Tail Pod</h3>
+                <div class="download-meta">BINARY STL • 14.4 KB</div>
+              </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;">
+              Aerodynamic motorcycle tail pod with 15° outward splay for dual ESP32-CAMs, rain lens visors, cable relief canal, and M4 mounting brackets.
+            </p>
+          </div>
+          <a href="assets/downloads/dual_cam_tail_pod.stl" download class="btn btn-secondary" style="width:100%;text-align:center;justify-content:center;">
+            Download Pod STL ↓
+          </a>
+        </div>
+
+        <!-- Card 2: Handlebar Display Sun Hood -->
+        <div class="download-card">
+          <div>
+            <div class="download-header">
+              <div class="download-icon amber">☀️</div>
+              <div>
+                <h3 style="font-size:1.1rem;color:#fff;">Handlebar Display Hood</h3>
+                <div class="download-meta">BINARY STL • 16.9 KB</div>
+              </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;">
+              Anti-glare sun visor cradle for 5" display/phone with 28mm glare hood, bottom USB cable pass-through, and dual 22mm/28mm bar clamps.
+            </p>
+          </div>
+          <a href="assets/downloads/handlebar_display_hood.stl" download class="btn btn-secondary" style="width:100%;text-align:center;justify-content:center;">
+            Download Hood STL ↓
+          </a>
+        </div>
+
+        <!-- Card 3: Real Road Benchmark Report -->
+        <div class="download-card">
+          <div>
+            <div class="download-header">
+              <div class="download-icon green">📊</div>
+              <div>
+                <h3 style="font-size:1.1rem;color:#fff;">Real-Road Benchmark</h3>
+                <div class="download-meta">HTML REPORT • 560+ FPS</div>
+              </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;">
+              Stress-tested against real motorcycle rear dashcam footage in daytime traffic and night rain. Sub-2ms edge latency with 100% frame throughput.
+            </p>
+          </div>
+          <a href="benchmark_report.html" target="_blank" class="btn btn-primary" style="width:100%;text-align:center;justify-content:center;">
+            View Live Report ↗
+          </a>
+        </div>
+
+        <!-- Card 4: Quantized Edge AI Model -->
+        <div class="download-card">
+          <div>
+            <div class="download-header">
+              <div class="download-icon">🧠</div>
+              <div>
+                <h3 style="font-size:1.1rem;color:#fff;">Quantized INT8 Model</h3>
+                <div class="download-meta">ONNX INT8 • 3.34 MB (72.7% Compressed)</div>
+              </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;">
+              Optimized YOLOv8n object detection engine quantized for mobile CPUs & edge NPUs. Slices latency to ~1.7ms per frame for instantaneous TTC warnings.
+            </p>
+          </div>
+          <a href="https://github.com/blankframe-tech/Indriyo" target="_blank" class="btn btn-secondary" style="width:100%;text-align:center;justify-content:center;">
+            View Model on GitHub ↗
+          </a>
         </div>
       </div>
     </div>
