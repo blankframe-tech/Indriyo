@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indriyo (ইন্দ্রিয়) - Print Poster (A3/A4)</title>
+  <style>
+    @page {
+      size: A3 portrait;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #06080d;
+      color: #f0f4fc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+    .poster-canvas {
+      width: 800px;
+      height: 1131px; /* A4/A3 Aspect ratio */
+      background: #090d14;
+      border: 2px solid #1a2333;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 240, 255, 0.1);
+    }
+    /* Technical Corner Reticles */
+    .corner-mark {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-color: #00f0ff;
+      border-style: solid;
+      z-index: 10;
+    }
+    .corner-tl { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
+    .corner-tr { top: 16px; right: 16px; border-width: 2px 2px 0 0; }
+    .corner-bl { bottom: 16px; left: 16px; border-width: 0 0 2px 2px; }
+    .corner-br { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+
+    /* Header */
+    .poster-header {
+      padding: 36px 40px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .brand-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+    .brand-title span.bangla {
+      color: #ff9d00;
+      font-size: 1.8rem;
+      margin-left: 8px;
+    }
+    .tagline {
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #00f0ff;
+      text-transform: uppercase;
+      margin-top: 6px;
+      font-weight: 700;
+    }
+    .spec-code {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: #8e9bb0;
+      text-align: right;
+    }
+
+    /* Hero Visual */
+    .poster-hero {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #040609;
+    }
+    .poster-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 13, 20, 0.4) 0%, transparent 30%, transparent 70%, rgba(9, 13, 20, 0.9) 100%);
+    }
+    .hud-callout {
+      position: absolute;
+      bottom: 24px;
+      left: 36px;
+      right: 36px;
+      background: rgba(12, 17, 26, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 157, 0, 0.4);
+      border-left: 4px solid #ff9d00;
+      padding: 16px 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hud-callout-text h4 {
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    .hud-callout-text p {
+      color: #8e9bb0;
+      font-size: 0.8rem;
+    }
+    .badge-amber {
+      background: rgba(255, 157, 0, 0.2);
+      color: #ff9d00;
+      font-family: monospace;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* Footer Specs Grid */
+    .poster-footer {
+      padding: 24px 36px 36px;
+      background: #0c111a;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .spec-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 12px;
+      border-radius: 6px;
+    }
+    .spec-num {
+      font-family: monospace;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #00f0ff;
+    }
+    .spec-lbl {
+      font-size: 0.7rem;
+      color: #8e9bb0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #5a667a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 16px;
+    }
+    .footer-bar strong {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="poster-canvas">
+    <!-- Reticles -->
+    <div class="corner-mark corner-tl"></div>
+    <div class="corner-mark corner-tr"></div>
+    <div class="corner-mark corner-bl"></div>
+    <div class="corner-mark corner-br"></div>
+
+    <!-- Header -->
+    <div class="poster-header">
+      <div>
+        <div class="brand-title">INDRIYO <span class="bangla">ইন্দ্রিয়</span></div>
+        <div class="tagline">The Sixth Sense for Motorcyclists</div>
+      </div>
+      <div class="spec-code">
+        SYSTEM: ADAS-MK1<br>
+        AI MID-LAYER CORE<br>
+        LOC: DHAKA / GLOBAL
+      </div>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="poster-hero">
+      <img src="../images/indriyo_hero_poster.jpg" alt="Indriyo Hero Superbike at Night">
+      <div class="hero-overlay"></div>
+      
+      <div class="hud-callout">
+        <div class="hud-callout-text">
+          <h4>Intuitive Peripheral Digital Rearview Mirror</h4>
+          <p>Amber Blind Spot Alert • Laser Red Time-to-Collision Alert • Helmet Audio</p>
+        </div>
+        <span class="badge-amber">ACTIVE ADAS</span>
+      </div>
+    </div>
+
+    <!-- Footer Specs -->
+    <div class="poster-footer">
+      <div class="specs-grid">
+        <div class="spec-box">
+          <div class="spec-num">&lt; 25ms</div>
+          <div class="spec-lbl">Edge AI Latency</div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-num">170°</div>
+          <div class="spec-lbl">Dual Tail FOV</div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-num">&lt; 1.8s</div>
+          <div class="spec-lbl">Predictive TTC</div>
+        </div>
+        <div class="spec-box">
+          <div class="spec-num">&lt; ৳3,000</div>
+          <div class="spec-lbl">Dhaka DIY BOM</div>
+        </div>
+      </div>
+
+      <div class="footer-bar">
+        <div><strong>BLANKFRAME TECHNOLOGIES</strong> — Open Source Edge AI Initiative</div>
+        <div>github.com/blankframe-tech/Indriyo</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
