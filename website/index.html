@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indriyo (ইন্দ্রিয়) | The Sixth Sense for Motorcyclists</title>
+  <meta name="description" content="Edge AI Advanced Rider Assistance System (ADAS) with Blind Spot Detection, Predictive Time-to-Collision (TTC), and intuitive peripheral mirror alerts.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏍️</text></svg>">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <div class="container nav-bar">
+      <div class="logo">
+        <span>INDRIYO</span>
+        <span class="logo-bangla">ইন্দ্রিয়</span>
+        <span class="logo-badge">ADAS AI</span>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#simulator">Live Simulator</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#compare">Spec Showdown</a></li>
+          <li><a href="#bom">Bangladesh BOM</a></li>
+          <li><a href="#circuit">Circuit Guide</a></li>
+          <li><a href="#posters">Marketing Kit</a></li>
+        </ul>
+      </nav>
+      <div>
+        <a href="#simulator" class="btn btn-primary">Launch Simulator</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-pill">
+          <span class="pulse-dot"></span>
+          <span>EDGE AI MOTORCYCLE ADAS SYSTEM</span>
+        </div>
+        <h1>The Sixth Sense for <span class="gradient-text">Motorcyclists.</span></h1>
+        <p class="hero-desc">
+          Eliminate blind spots and rear-end collisions with intelligent edge computer vision.
+          Converts discreet tail cameras into an active, predictive safety layer with intuitive
+          peripheral mirror alerts and real-time Time-to-Collision vectoring.
+        </p>
+        <div class="hero-actions">
+          <a href="#simulator" class="btn btn-primary">⚡ Test In-Browser Simulator</a>
+          <a href="#bom" class="btn btn-outline">🛠️ DIY Build for Under ৳3,000</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-val">&lt; 25ms</div>
+            <div class="stat-lbl">Inference Latency</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">170°</div>
+            <div class="stat-lbl">Dual Tail FOV</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">৳2,850</div>
+            <div class="stat-lbl">POC Hardware BOM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-media-wrapper">
+        <div class="hero-media-card">
+          <img src="assets/images/indriyo_product_hero.jpg" alt="Indriyo Hardware Pod and Digital Mirror">
+          <div class="media-badge">
+            <div>
+              <div class="badge-title">Stealth Tail Dual Pod & Digital Mirror</div>
+              <div class="badge-sub">Seamless ThrottleIQ smartphone integration</div>
+            </div>
+            <span class="badge-tag win">ACTIVE ADAS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Live Simulator -->
+  <section id="simulator" class="simulator-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Interactive Proof of Concept</div>
+        <h2 class="section-title">Live In-Browser ADAS Simulator</h2>
+        <p class="section-subtitle">
+          Experience how Indriyo tracks approaching vehicles, detects blind spot occupancy,
+          and triggers peripheral amber and red warnings in real time.
+        </p>
+      </div>
+
+      <div class="sim-container">
+        <!-- Display Screen / Mirror Frame -->
+        <div id="simDisplayFrame" class="sim-display-frame">
+          <canvas id="adasCanvas"></canvas>
+        </div>
+
+        <!-- Controls Bar -->
+        <div class="sim-controls-bar">
+          <!-- Scenario selector -->
+          <div class="sim-btn-group">
+            <button class="sim-scenario-btn active" data-scenario="tailgater">🏎️ Fast Tailgater (TTC)</button>
+            <button class="sim-scenario-btn" data-scenario="blindspot">🛵 Left Blind Spot</button>
+            <button class="sim-scenario-btn" data-scenario="dual_overtake">🔄 Dual Overtake</button>
+            <button class="sim-scenario-btn" data-scenario="dhaka_traffic">🚌 Dhaka Gridlock</button>
+          </div>
+
+          <!-- Speed slider -->
+          <div class="sim-slider-wrap">
+            <label>
+              <span>Motorcycle Road Speed:</span>
+              <span id="speedValueDisplay" style="color:var(--accent-cyan);font-weight:700;">60 KM/H</span>
+            </label>
+            <input type="range" id="speedSlider" min="0" max="120" value="60" step="5">
+          </div>
+
+          <!-- Quick Toggles -->
+          <div class="sim-toggles">
+            <button id="toggleSoundBtn" class="icon-btn">🔇 Audio Alerts: OFF</button>
+            <button id="toggleGridBtn" class="icon-btn active">Zone Grid</button>
+            <button id="toggleBoxesBtn" class="icon-btn active">HUD Boxes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Engineered For Riders</div>
+        <h2 class="section-title">The Indriyo Architecture</h2>
+        <p class="section-subtitle">
+          Bridging the white space between screenless radar and dumb display dashcams.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon amber">👁️</div>
+          <h3>Active Blind Spot Detection (BSD)</h3>
+          <p>
+            Seamlessly monitors vehicles lingering in 120°–165° left and right rear quadrants.
+            Triggers an immediate solid amber peripheral border so you know a vehicle is there without breaking head posture.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon red">⚡</div>
+          <h3>Predictive Time-to-Collision (TTC)</h3>
+          <p>
+            Uses Optical Expansion (Tau Theory) and relative velocity vectoring.
+            Differentiates between a car pacing safely behind and a high-speed vehicle on a collision course (< 1.8s TTC).
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon cyan">🧭</div>
+          <h3>Context-Adaptive Telemetry</h3>
+          <p>
+            Connects to your bike speed via OBD-II, GPS, or ThrottleIQ middleware.
+            Scales sensitivity dynamically: stopped at a red light, approaching traffic triggers alerts from further away!
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon red">🚨</div>
+          <h3>Intuitive Peripheral UX</h3>
+          <p>
+            The human peripheral eye is highly sensitive to color strobes. Solid Amber draws gentle attention;
+            rapidly flashing Crimson Red instantly triggers evasive action before a rear collision occurs.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon amber">🏍️</div>
+          <h3>Stealth Tail Pod Design</h3>
+          <p>
+            No bulky 360° dome cameras or awkward radar boxes. Dual waterproof miniature optical lenses
+            tuck invisibly beneath the pillion seat or license plate bracket.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon cyan">📱</div>
+          <h3>ThrottleIQ Smartphone Bridge</h3>
+          <p>
+            Zero extra compute cost! Use your mounted phone as the AI brain via our drop-in Flutter module.
+            Your phone ingests the ESP32 Wi-Fi feed, runs YOLO inference, and provides helmet audio warnings.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market Comparison Table -->
+  <section id="compare" class="comparison-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Market White Space</div>
+        <h2 class="section-title">Indriyo vs. The Competition</h2>
+        <p class="section-subtitle">
+          See why Indriyo is the only system offering both active visual verification and edge predictive intelligence.
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Feature / Metric</th>
+              <th style="color:var(--accent-cyan);">Indriyo (ইন্দ্রিয়)</th>
+              <th>Ride Vision 2</th>
+              <th>Garmin Varia Radar</th>
+              <th>Chigee AIO-5 Smart Dash</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td><strong>Architecture</strong></td>
+              <td><span class="badge-tag win">Dual AI Vision + Screen</span></td>
+              <td>Screenless Mirror LEDs</td>
+              <td>Radar Box (LED Blips)</td>
+              <td>CarPlay Screen (Dumb Cam)</td>
+            </tr>
+            <tr>
+              <td><strong>Visual Feed ("Trust but Verify")</strong></td>
+              <td><span class="badge-tag win">YES (Live Digital Mirror)</span></td>
+              <td><span class="badge-tag lose">NO (No Display)</span></td>
+              <td><span class="badge-tag lose">NO (No Video)</span></td>
+              <td><span class="badge-tag win">YES (Video Only)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Object Classification</strong></td>
+              <td><span class="badge-tag win">YES (Car, Bike, Bus, Truck)</span></td>
+              <td>YES (AI Vision)</td>
+              <td><span class="badge-tag lose">NO (Mass Only)</span></td>
+              <td><span class="badge-tag lose">NO / Basic</span></td>
+            </tr>
+            <tr>
+              <td><strong>Time-to-Collision (TTC) Vectoring</strong></td>
+              <td><span class="badge-tag win">YES (Optical Tau + Speed)</span></td>
+              <td>YES (Proprietary)</td>
+              <td>Basic Proximity Radar</td>
+              <td><span class="badge-tag lose">NO (Proximity Only)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tail Aesthetic Footprint</strong></td>
+              <td><span class="badge-tag win">Stealth Mini Dual Lenses</span></td>
+              <td>Bulky Front/Rear Pods</td>
+              <td>Bulky Radar Brick</td>
+              <td>Standard Dashcam</td>
+            </tr>
+            <tr>
+              <td><strong>Bangladesh DIY Cost</strong></td>
+              <td><span class="badge-tag win">&lt; ৳3,000 BDT</span></td>
+              <td>৳50,000+ (Imported)</td>
+              <td>৳30,000+ (Imported)</td>
+              <td>৳45,000+ (Imported)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bangladesh BOM & Pricing -->
+  <section id="bom" class="bom-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Dhaka Sourcing & BOM</div>
+        <h2 class="section-title">Build Your Prototype in Bangladesh</h2>
+        <p class="section-subtitle">
+          100% off-the-shelf components sourced locally from TechShopBD, BDTronics, and Daraz.
+        </p>
+      </div>
+
+      <div class="bom-card">
+        <div class="bom-tabs">
+          <button class="bom-tab-btn active" data-strat="strat2">Strategy 2: Smartphone Brain (Under ৳3,000)</button>
+          <button class="bom-tab-btn" data-strat="strat1">Strategy 1: Luckfox NPU Linux Board (~৳13,400)</button>
+          <button class="bom-tab-btn" data-strat="strat3">Strategy 3: 24GHz Radar Hybrid (~৳3,850)</button>
+        </div>
+
+        <div id="bomList" class="bom-list">
+          <!-- Populated by app.js -->
+        </div>
+
+        <div class="bom-total-box">
+          <div>
+            <div style="font-weight:700;font-size:1.1rem;color:#fff;">Estimated Hardware Cost</div>
+            <div style="font-size:0.8rem;color:var(--text-muted);">Sourced locally in Dhaka (BDT)</div>
+          </div>
+          <div id="bomTotal" class="bom-total-val">৳2,850 BDT</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motorcycle Circuit Wiring -->
+  <section id="circuit" class="circuit-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Electrical Engineering</div>
+        <h2 class="section-title">Motorcycle Safe Wiring Schematic</h2>
+        <p class="section-subtitle">
+          Protected from alternator voltage spikes, engine vibration, and battery parasitic drain.
+        </p>
+      </div>
+
+      <div class="circuit-schematic-box">
+[ Motorcycle Switched 12V Line (License Plate / Tail Light) ]
+       │
+       ├───(+) Red Wire ──► [ 3A Inline Fuse ] ──► IN+ [ LM2596 Buck ] OUT+ ──┬──► (+) [1000µF Cap] ──► 5.1V [Left ESP32-CAM]
+       │                                                                       │
+       │                                                                       └──► (+) [1000µF Cap] ──► 5.1V [Right ESP32-CAM]
+       │
+       └───(-) Black Wire ───────────────────────► IN- [  Converter  ] OUT- ──┬──► (-) [1000µF Cap] ──► GND  [Left ESP32-CAM]
+                                                                               │
+                                                                               └──► (-) [1000µF Cap] ──► GND  [Right ESP32-CAM]
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon amber">⚡</div>
+          <h3>1. Calibrate Potentiometer First</h3>
+          <p>
+            Factory buck converters often ship set to 10V–12V. Turn the brass adjustment screw counter-clockwise until your multimeter reads <strong>exactly 5.1V</strong> before plugging in the ESP32s!
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon red">🛡️</div>
+          <h3>2. Anti-Brownout Capacitors</h3>
+          <p>
+            Solder one 1000µF 16V electrolytic capacitor directly across the 5V and GND pins of each ESP32 board to absorb Wi-Fi transmission spikes and stop reboots.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon cyan">🔒</div>
+          <h3>3. Vibration Locking</h3>
+          <p>
+            Motorcycle engine RPM vibrations can drift adjustment screws. Add a drop of clear nail polish or silicone adhesive to lock the screw head permanently in place.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketing & Posters Gallery -->
+  <section id="posters" class="posters-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Visual Identity & Concept</div>
+        <h2 class="section-title">Marketing Gallery & Posters</h2>
+        <p class="section-subtitle">
+          Promotional renders and Cockpit UI captures for the Indriyo launch campaign.
+        </p>
+      </div>
+
+      <div class="posters-grid">
+        <div class="poster-item">
+          <img src="assets/images/indriyo_hero_poster.jpg" alt="Indriyo Hero Marketing Poster">
+          <div class="poster-caption">
+            <span>Hero Cyberpunk Campaign Poster</span>
+            <span class="badge-tag win">A3 PRINT READY</span>
+          </div>
+        </div>
+
+        <div class="poster-item">
+          <img src="assets/images/indriyo_rider_pov.jpg" alt="Rider Cockpit POV with Red Threat Alert">
+          <div class="poster-caption">
+            <span>Cockpit POV: Critical Collision Strobe</span>
+            <span class="badge-tag lose">TTC 1.2s ALERT</span>
+          </div>
+        </div>
+
+        <div class="poster-item">
+          <img src="assets/images/hud_live_snapshot.jpg" alt="Indriyo Edge HUD Live Output">
+          <div class="poster-caption">
+            <span>Live OpenCV Digital Mirror HUD</span>
+            <span class="badge-tag neutral">450+ FPS ENGINE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>INDRIYO (ইন্দ্রিয়)</h4>
+          <p style="margin-bottom:16px;">
+            The Sixth Sense for Motorcyclists. Built with pride for riders across Bangladesh and the world.
+          </p>
+          <p>© 2026 Blankframe Technologies. Open Source ADAS Initiative.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Core Modules</h5>
+          <ul>
+            <li><a href="#simulator">ADAS Simulator</a></li>
+            <li><a href="#features">Blind Spot Detection</a></li>
+            <li><a href="#features">TTC Vectoring</a></li>
+            <li><a href="#circuit">Hardware Schematics</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Firmware & Code</h5>
+          <ul>
+            <li><a href="#bom">ESP32-CAM Streamer</a></li>
+            <li><a href="#features">Python Edge Engine</a></li>
+            <li><a href="#features">ThrottleIQ Bridge</a></li>
+            <li><a href="#posters">3D Tail Pod CAD</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Community</h5>
+          <ul>
+            <li><a href="https://github.com/blankframe-tech/Indriyo" target="_blank">GitHub Repository</a></li>
+            <li><a href="#bom">Daraz Sourcing List</a></li>
+            <li><a href="#compare">Spec White Paper</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Engineered for extreme performance, rider situational awareness, and zero-compromise safety.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/simulator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
